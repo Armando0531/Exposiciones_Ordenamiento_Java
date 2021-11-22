@@ -35,8 +35,6 @@ class Alumno{
 		return "Alumno [nombre= " + nombre + ", carrera= "+ carrera + ", promedio= "+ promedio + "]";
 	}
 	
-	
-	
 }
 class OrdenamientoQuicksort{
 	private static void quicksort(int []a, int primero, int ultimo) {
@@ -106,6 +104,32 @@ class OrdenamientoQuicksort{
 	}
 }
 
+class Shellsort{
+	public static void shellsort(int[] nums) {
+		 int salto, aux, i;
+	        boolean cambios;
+	  
+	        for (salto = nums.length / 2; salto != 0; salto /= 2) {
+	            cambios = true;
+	            while (cambios) {                                        
+	                cambios = false;
+	                for (i = salto; i < nums.length; i++)   
+	                {
+	                    if (nums[i - salto] > nums[i]) {     
+	                        aux = nums[i];                
+	                        nums[i] = nums[i - salto];
+	                        nums[i - salto] = aux;
+	                        cambios = true;                                          
+	                    }
+	                }
+	            }
+	        }
+		
+	}
+	
+	
+}
+
 
 public class PruebaOrdenamiento {
 
@@ -116,7 +140,8 @@ public class PruebaOrdenamiento {
 			 a[i] = random.nextInt(100)+1;
 		 }
 		 
-		 System.out.println("Vector sin ordenar");
+		 System.out.println("Algoritmo QUICKSORT");
+		 System.out.println("\nVector sin ordenar");
 		 System.out.println(Arrays.toString(a));
 		 
 		 OrdenamientoQuicksort.quicksort(a);
@@ -133,6 +158,23 @@ public class PruebaOrdenamiento {
 		 
 		 System.out.println("\nVector ordenado");
 		 System.out.println(Arrays.toString(alumnos));
+		 
+		 int[] nums = new int[15];
+			
+			for(int i=0; i<nums.length; i++) {
+				nums[i]= (int)(Math.random()*100);
+			}
+			
+			System.out.println("\nalgoritmo Shellsort");
+			System.out.println("\nSin ordenar");
+			System.out.println(Arrays.toString(nums));
+			
+			Shellsort ss = new Shellsort();
+			
+			ss.shellsort(nums);
+			
+			System.out.println("\nordenado");
+			System.out.println(Arrays.toString(nums));
 		 
 
 	}
