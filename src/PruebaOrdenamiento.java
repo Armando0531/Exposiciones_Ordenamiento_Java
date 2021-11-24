@@ -105,25 +105,71 @@ class OrdenamientoQuicksort{
 }
 
 class Shellsort{
-	public static void shellsort(int[] nums) {
+	public static void shellsort(int[] A) {
 		 int salto, aux, i;
 	        boolean cambios;
 	  
-	        for (salto = nums.length / 2; salto != 0; salto /= 2) {
+	        for (salto = A.length / 2; salto != 0; salto /= 2) {
 	            cambios = true;
 	            while (cambios) {                                        
 	                cambios = false;
-	                for (i = salto; i < nums.length; i++)   
+	                for (i = salto; i < A.length; i++)   
 	                {
-	                    if (nums[i - salto] > nums[i]) {     
-	                        aux = nums[i];                
-	                        nums[i] = nums[i - salto];
-	                        nums[i - salto] = aux;
+	                    if (A[i - salto] > A[i]) {     
+	                        aux = A[i];                
+	                        A[i] = A[i - salto];
+	                        A[i - salto] = aux;
 	                        cambios = true;                                          
 	                    }
 	                }
 	            }
 	        }
+		
+	}
+	
+	
+}
+
+class Radix{
+	
+	public static void radix(int[]nums) {
+		int [][] bucket = new  int[10][nums.length];
+		int [] bucketOfElement = new int [10];
+		int max=0;
+		
+		for(int i =0 ; i< nums.length; i++) {
+			if(nums[i]>max) {
+				max= nums[i];
+			}
+			
+		}
+		
+		int maxLength = (max+"").length();
+		for(int m =0, n=1; m<maxLength; m++, n*=10) {
+			
+			for(int i=0; i< nums.length; i++) {
+				int digit = nums[i]/n%10;
+				
+				bucket[digit][bucketOfElement[digit]]= nums[i];
+				bucketOfElement[digit]++;
+			}
+		int index = 0;
+		
+		for(int j =0; j<10; j++ ) {
+			for(int k= 0; k<bucketOfElement[j]; k++) {
+				nums[index]= bucket[j][k];
+				index++;
+			}
+			bucketOfElement[j]=0;
+			
+		}
+		
+		
+		
+		}
+	
+		
+		
 		
 	}
 	
@@ -159,23 +205,41 @@ public class PruebaOrdenamiento {
 		 System.out.println("\nVector ordenado");
 		 System.out.println(Arrays.toString(alumnos));
 		 
-		 int[] nums = new int[15];
+		 int[] A = new int[15];
+			
+			for(int i=0; i<A.length; i++) {
+				A[i]= (int)(Math.random()*100);
+			}
+			
+			System.out.println("\nalgoritmo Shellsort");
+			System.out.println("\nSin ordenar");
+			System.out.println(Arrays.toString(A));
+			
+			Shellsort ss = new Shellsort();
+			
+			ss.shellsort(A);
+			
+			System.out.println("\nordenado");
+			System.out.println(Arrays.toString(A));
+			
+			System.out.println("\nAlgoritmo RADIX");
+			
+			int[] nums = new int[15];
 			
 			for(int i=0; i<nums.length; i++) {
 				nums[i]= (int)(Math.random()*100);
 			}
 			
-			System.out.println("\nalgoritmo Shellsort");
 			System.out.println("\nSin ordenar");
 			System.out.println(Arrays.toString(nums));
 			
-			Shellsort ss = new Shellsort();
+			Radix ra = new Radix();
 			
-			ss.shellsort(nums);
+			ra.radix(nums);
 			
 			System.out.println("\nordenado");
 			System.out.println(Arrays.toString(nums));
-		 
+
 
 	}
 
